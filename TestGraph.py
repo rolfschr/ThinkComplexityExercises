@@ -32,8 +32,10 @@ def main(script, n='10', *args):
 	g = SmallWorldGraph(vs)
 	g.add_regular_ring_lattice(4)
 	#print g.get_max_neighbors()
+	print g.get_clustering_coefficient()
 	p = 0.8
 	g.rewire(p)
+	print g.get_clustering_coefficient()
 	#g.add_random_edges(1.0)
 	#print g.is_connected()
 

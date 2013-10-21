@@ -14,7 +14,6 @@ class SmallWorldGraph(RandomGraph):
 			edges_per_v[v] = self.out_edges(v)
 
 		for i in range(len(self.values()[0])):
-			print i
 			already_considered = []
 			for v in self.keys():
 				e = edges_per_v[v][i]
@@ -22,7 +21,6 @@ class SmallWorldGraph(RandomGraph):
 					if (random.random() <= p):
 						# remvoe edge and make new one
 						self.remove_edge(e)
-						print v
 						while(True):
 							w = random.choice(self.keys())
 							if (w != v and self.get_edge(v, w) == None):
@@ -31,3 +29,22 @@ class SmallWorldGraph(RandomGraph):
 					already_considered.append(e)
 
 		#print p
+	def get_clustering_coefficient(self):
+		cvs = []
+		for v in self.keys():
+			cvs.append(self.local_clustering_coefficient(v))
+		mean = sum(cvs) / float(len(cvs))
+		return mean
+
+	def local_clustering_coefficient(self, v):
+		neighbors = self.out_vertices(v)
+		maxi = len(neighbors) * (len(neighbors) - 1) / 2
+		cv = 0
+		for n in neighbors:
+			for m in neighbors:
+				if (n != m):
+					if (m in self[n]): # edge exists
+						cv += 1
+		if (cv > 0):
+			cv /= 2 # dont count edges twice
+		return cv / float(maxi)
