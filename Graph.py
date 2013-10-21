@@ -8,6 +8,7 @@ Distributed under the GNU General Public License at gnu.org/licenses/gpl.html.
 """
 
 from collections import deque
+import random
 
 class Vertex(object):
 	"""A Vertex is a node in a graph."""
@@ -125,23 +126,50 @@ class Graph(dict):
 			for w in self:
 				if (not w in self[v]):
 					self.add_edge(v, w)
+	def remove_all_edges(self):
+		for v in self.keys():
+			self[v] = {}
 
 	def add_regular_edges(self, n):
+		self.remove_all_edges()
 		for v in self.keys():
 			nbr_edges = len(self.out_edges(v))
 			if (nbr_edges == n):
 				continue
 			i = nbr_edges
 			while (i < n):
-				for w in reversed(self.keys()):
-					if (v == w
-							or len(self.out_edges(w)) == n
-							or self.get_edge(v, w) != None):
-						continue
+				w = random.choice(self.keys())
+				if (v == w
+						or len(self.out_edges(w)) == n
+						or self.get_edge(v, w) != None):
+					continue
+				self.make_edge(v, w)
+				i += 1
+
+	# build up a regular ring lattice
+	# assuming n % 2 == 0 in order to connect eacht
+	# vertix to it's n nearest neighbours
+	def add_regular_ring_lattice(self, n):
+		self.remove_all_edges()
+		vs = self.keys()
+		for i in range(len(vs)):
+			v = vs[i]
+			for j in range(-n / 2, n / 2 + 1):
+				if (j == 0):
+					continue
+				index = (i + j) % len(vs)
+				w = vs[index]
+				if (self.get_edge(v, w) == None):
 					self.make_edge(v, w)
-					i += 1
-					if (i == n):
-						break
+
+
+
+
+
+
+	def get_max_neighbors(self):
+		num_neighbors = [len(self.out_vertices(v)) for v in self.keys()]
+		return max(num_neighbors)
 
 	def is_connected(self):
 		queue = deque()
@@ -154,6 +182,7 @@ class Graph(dict):
 				if (not w in visited and not w in queue):
 					queue.append(w)
 		return (len(visited) == len(self.keys()))
+
 
 def main(script, *args):
 	v = Vertex('v')
@@ -169,6 +198,7 @@ def main(script, *args):
 	u = Vertex('u')
 	g.add_vertex(u)
 	print g.edges()
+	print g.get_max_neighbors()
 #	print g.get_edge(v, w)
 #	g.remove_edge(e)
 #	print g.get_edge(v, w)
