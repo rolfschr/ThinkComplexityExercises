@@ -3,7 +3,8 @@ from GraphWorld import *
 from Graph import Vertex
 from Graph import Edge
 from Graph import Graph
-from RandomGraph import RandomGraph
+from RG import RandomGraph
+from SmallWorldGraph import SmallWorldGraph
 
 def testrandomcomplete(rn = 15):
 	for n in range(2, rn):
@@ -26,13 +27,18 @@ def main(script, n='10', *args):
 
 	# create a graph and a layout
 	#g = Graph(vs)
-	g = RandomGraph(vs)
-	#g.add_regular_edges(3)
-	g.add_random_edges(1.0)
-	print g.is_connected()
-	layout = CircleLayout(g)
+	#g = RandomGraph(vs)
+	#g.is_connected
+	g = SmallWorldGraph(vs)
+	g.add_regular_ring_lattice(4)
+	#print g.get_max_neighbors()
+	p = 0.8
+	g.rewire(p)
+	#g.add_random_edges(1.0)
+	#print g.is_connected()
 
 	# draw the graph
+	layout = CircleLayout(g)
 	gw = GraphWorld()
 	gw.show_graph(g, layout)
 	gw.mainloop()
@@ -40,7 +46,7 @@ def main(script, n='10', *args):
 
 if __name__ == '__main__':
 	import sys
-	#main(*sys.argv)
-	testrandomcomplete()
+	main(*sys.argv)
+	#testrandomcomplete()
 
 
