@@ -39,6 +39,8 @@ class SmallWorldGraph(RandomGraph):
 	def local_clustering_coefficient(self, v):
 		neighbors = self.out_vertices(v)
 		maxi = len(neighbors) * (len(neighbors) - 1) / 2
+		if (maxi == 0):
+			return 0
 		cv = 0
 		for n in neighbors:
 			for m in neighbors:

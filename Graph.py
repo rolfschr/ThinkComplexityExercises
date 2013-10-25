@@ -80,6 +80,7 @@ class Graph(dict):
 		self.add_edge(Edge(v, w))
 
 
+### chap 2, ex 02.3 BEGIN ###
 	def get_edge(self, v, w):
 		e = None
 		try:
@@ -87,16 +88,22 @@ class Graph(dict):
 		except:
 			pass
 		return e
+### chap 2, ex 02.3 END   ###
 
+### chap 2, ex 02.4 BEGIN ###
 	def remove_edge(self, e):
 		v, w = e
 		if (self.get_edge(v, w) != None):
 			del(self[v][w])
 			del(self[w][v])
+### chap 2, ex 02.4 END   ###
 
+### chap 2, ex 02.5 BEGIN ###
 	def vertices(self):
 		return self.keys()
+### chap 2, ex 02.5 END ###
 
+### chap 2, ex 02.6 BEGIN ###
 	def edges(self):
 		edges = [Edge(v, w) for v in self.keys() for w in self.keys() if w in self[v]]
 #		edges = []
@@ -106,30 +113,40 @@ class Graph(dict):
 #				if (not e in edges):
 #					edges.append(e)
 		return edges
+### chap 2, ex 02.6 END   ###
 
+### chap 2, ex 02.7 BEGIN ###
 	def out_vertices(self, v):
 		neighbors = [x for x in self[v].keys()]
 #		neighbors = []
 #		if (v in self):
 #			neighbors = self[v].keys()
 		return neighbors
+### chap 2, ex 02.7 END   ###
 
+### chap 2, ex 02.8 BEGIN ###
 	def out_edges(self, v):
 		edges = [x for x in self[v].values()]
 #		edges = []
 #		if (v in self):
 #			edges = self[v].values()
 		return edges
+### chap 2, ex 02.8 END   ###
 
+
+### chap 2, ex 02.9 BEGIN ###
 	def add_all_edges(self):
 		for v in self:
 			for w in self:
 				if (not w in self[v]):
 					self.add_edge(v, w)
+### chap 2, ex 02.9 END   ###
+
 	def remove_all_edges(self):
 		for v in self.keys():
 			self[v] = {}
 
+### chap 2, ex 03 BEGIN ###
 	def add_regular_edges(self, n):
 		self.remove_all_edges()
 		for v in self.keys():
@@ -145,6 +162,7 @@ class Graph(dict):
 					continue
 				self.make_edge(v, w)
 				i += 1
+### chap 2, ex 03 END   ###
 
 	# build up a regular ring lattice
 	# assuming n % 2 == 0 in order to connect eacht
@@ -163,14 +181,11 @@ class Graph(dict):
 					self.make_edge(v, w)
 
 
-
-
-
-
 	def get_max_neighbors(self):
 		num_neighbors = [len(self.out_vertices(v)) for v in self.keys()]
 		return max(num_neighbors)
 
+### chap 2, ex 05 BEGIN ###
 	def is_connected(self):
 		queue = deque()
 		queue.append(self.keys()[0])
@@ -182,7 +197,36 @@ class Graph(dict):
 				if (not w in visited and not w in queue):
 					queue.append(w)
 		return (len(visited) == len(self.keys()))
+### chap 2, ex 05 END   ###
 
+### chap 4, ex 05 BEGIN ###
+	# return a dict containing all distances from v to all
+	# other vertices, if w != None, return distance(v,w)
+	def shortest_path(self, v, w = None):
+		# assign all vertices 'infinity' except src vertex
+		dists = {}
+		for n in self.vertices():
+			dists[n] = None
+		dists[v] = 0
+
+		queue = deque()
+		queue.append(v)
+		while (len(queue) > 0):
+			cur = queue.pop()
+			new_d = dists[cur] + 1
+			neighbors = self.out_vertices(cur)
+			for n in neighbors:
+				if (dists[n] == None):
+					# if we only compute distance(v,w)
+					if (w != None and w == n):
+						return new_d
+					dists[n] = new_d
+					queue.append(n)
+		return dists
+
+
+
+### chap 4, ex 05 END   ###
 
 def main(script, *args):
 	v = Vertex('v')
