@@ -12,9 +12,7 @@ List of Exercises
 * chap 2, ex 04: RandomGraph.py
 * chap 2, ex 05: Graph.py
 * chap 2, ex 07: misc.py
-
 * chap 3, ex 03: misc.py
-
 * chap 4, ex 01: FIFO.py
 * chap 4, ex 04: TestGraph.py
 
