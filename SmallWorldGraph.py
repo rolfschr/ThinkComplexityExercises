@@ -5,6 +5,7 @@ import random
 
 class SmallWorldGraph(RandomGraph):
 
+### chap 4, ex 04.1 BEGIN ###
 	def rewire(self, p):
 		# assume we start with a regular graph
 
@@ -27,8 +28,9 @@ class SmallWorldGraph(RandomGraph):
 								break
 						self.make_edge(v, w)
 					already_considered.append(e)
+### chap 4, ex 04.1 END   ###
 
-		#print p
+### chap 4, ex 04.2 BEGIN ###
 	def get_clustering_coefficient(self):
 		cvs = []
 		for v in self.keys():
@@ -50,3 +52,4 @@ class SmallWorldGraph(RandomGraph):
 		if (cv > 0):
 			cv /= 2 # dont count edges twice
 		return cv / float(maxi)
+### chap 4, ex 04.2 END   ###

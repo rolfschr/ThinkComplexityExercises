@@ -1,4 +1,4 @@
-
+### chap 4, ex 01 BEGIN ###
 class FIFO(object):
 
 	def __init__(self, bufsize = 4):
@@ -35,6 +35,7 @@ class FIFO(object):
 		out.append("start: %s, end: %s" % (self.start, self.end))
 		out.append("buffer: %s" % (self.buf))
 		return '\n'.join(out)
+### chap 4, ex 01 END   ###
 
 
 def main(script):

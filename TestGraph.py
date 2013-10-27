@@ -21,6 +21,7 @@ def testrandomcomplete(rn = 15):
 			g.add_random_edges(prob)
 			print "%s, %s, %s" % (n, prob, g.is_connected())
 
+### chap 4, ex 04.3 BEGIN ###
 def test_clustercoefficient():
 
 	ps = np.arange(0, 1, 0.01)
@@ -47,6 +48,7 @@ def test_clustercoefficient():
 	plt.plot(xs, ys)
 	plt.xscale('log')
 	plt.show()
+### chap 4, ex 04.3 END   ###
 
 
 
