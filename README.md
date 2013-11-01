@@ -17,6 +17,7 @@ List of Exercises
 * chap 4, ex 04: SmallWorldGraph.py/TestGraph.py
 * chap 4, ex 05: Graph.py/TestGraph.py
 * chap 4, ex 07: Graph.py
+* chap 5, ex 01: Zipf.py
 
 Licence
 -------
