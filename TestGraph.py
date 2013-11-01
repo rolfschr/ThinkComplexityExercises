@@ -50,9 +50,71 @@ def test_clustercoefficient():
 	plt.show()
 ### chap 4, ex 04.3 END   ###
 
+### chap 4, ex 02.2 BEGIN ###
+def test_clustercoefficient():
 
+	ps = np.arange(0, 1, 0.01)
+	n = 1000
+	e = 10
+	labels = string.ascii_lowercase + string.ascii_uppercase
+	vs = []
+	iter = misc.gen_identifier()
+	for i in range(n):
+		vs.append(Vertex(iter.next()))
+	g = SmallWorldGraph(vs)
+	g.add_regular_ring_lattice(e)
+	c0 = g.get_clustering_coefficient()
+	xs = []
+	ys = []
+	for p in ps:
+		g = SmallWorldGraph(vs)
+		g.add_regular_ring_lattice(e)
+		g.rewire(p)
+		ys.append(g.get_clustering_coefficient() / c0)
+		xs.append(p)
 
-def main(script, n='20', *args):
+	fig = plt.figure(dpi = 100)
+	plt.subplot(1,1,1)
+	plt.plot(xs, ys)
+	plt.xscale('log')
+	plt.show()
+### chap 4, ex 04.3 END   ###
+
+### chap 4, ex 05.2 BEGIN ###
+def test_average_path_len():
+
+	ps = np.arange(0, 1, 0.05)
+	print ps
+	n = 1000
+	e = 10
+	labels = string.ascii_lowercase + string.ascii_uppercase
+	vs = []
+	iter = misc.gen_identifier()
+	for i in range(n):
+		vs.append(Vertex(iter.next()))
+	g = SmallWorldGraph(vs)
+	g.add_regular_ring_lattice(e)
+	l0 = g.get_averaged_shortest_path()
+	layout = CircleLayout(g)
+	xs = []
+	ys = []
+	for p in ps:
+		g = SmallWorldGraph(vs)
+		g.add_regular_ring_lattice(e)
+		g.rewire(p)
+		l1 = g.get_averaged_shortest_path() / l0
+		ys.append(l1)
+		xs.append(p)
+		print l1, p
+
+	fig = plt.figure(dpi = 100)
+	plt.subplot(1,1,1)
+	plt.plot(xs, ys)
+	plt.xscale('log')
+	plt.show()
+### chap 4, ex 05.2 END   ###
+
+def main(script, n='10', *args):
 
 	# create n Vertices
 	n = int(n)
@@ -63,18 +125,22 @@ def main(script, n='20', *args):
 		vs.append(Vertex(iter.next()))
 	vs = [Vertex(c) for c in labels[:n]]
 
+	#test_average_path_len()
+
+
 	# create a graph and a layout
-	g = Graph(vs)
+	#g = Graph(vs)
 	#g = RandomGraph(vs)
 	#g.is_connected
-	#g = SmallWorldGraph(vs)
+	g = SmallWorldGraph(vs)
 	g.add_regular_ring_lattice(4)
-	v = vs[0]
-	print v
-	print g.shortest_path(v)
-	w = vs[3]
-	print w
-	print g.shortest_path(v, w)
+	print g.all_pairs_shortest_path()
+	#v = vs[0]
+	#print v
+	#print g.shortest_path(v)
+	#w = vs[3]
+	#print w
+	#print g.shortest_path(v, w)
 	#print g.get_max_neighbors()
 	#print g.get_clustering_coefficient()
 	#p = 0.8

@@ -223,10 +223,37 @@ class Graph(dict):
 					dists[n] = new_d
 					queue.append(n)
 		return dists
+### chap 4, ex 05.2 END   ###
 
+### chap 4, ex 07.1 BEGIN ###
+	def all_pairs_shortest_path(self):
+		d = []
+		vs = self.vertices()
+		for i in range(len(vs)):
+			v = vs[i]
+			for j in range(i + 1, len(vs)):
+				w = vs[j]
+				if (v != w):
+					d.append((v, w, self.shortest_path(v, w)))
+		return d
+### chap 4, ex 07.1 END   ###
 
+### chap 4, ex 05.2 BEGIN ###
+	def get_averaged_shortest_path(self):
+		d = {} # make sure we dont count pairs more than once
+		dd = [] # path lengts foreach pair
+		v = self.vertices()[0]
+		for v in self.keys():
+			d[v] = {}
+			l = self.shortest_path(v)
+			for w in l:
+				if (not w in d):
+					dd.append(l[w])
+					d[v][w] = None
 
-### chap 4, ex 05 END   ###
+		mean = float(sum(dd)) / len(dd)
+		return mean
+### chap 4, ex 05.2 END   ###
 
 def main(script, *args):
 	v = Vertex('v')
