@@ -1,6 +1,6 @@
 
 from Graph import *
-from RG import *
+from RandomGraph import *
 import random
 
 class SmallWorldGraph(RandomGraph):

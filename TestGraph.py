@@ -1,9 +1,9 @@
 import misc
-from Downey.GraphWorld import *
 from Graph import Vertex
 from Graph import Edge
 from Graph import Graph
-from RG import RandomGraph
+from Downey.GraphWorld import *
+from RandomGraph import RandomGraph
 from SmallWorldGraph import SmallWorldGraph
 
 from matplotlib import pyplot as plt

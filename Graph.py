@@ -212,7 +212,7 @@ class Graph(dict):
 		queue = deque()
 		queue.append(v)
 		while (len(queue) > 0):
-			cur = queue.pop()
+			cur = queue.popleft()
 			new_d = dists[cur] + 1
 			neighbors = self.out_vertices(cur)
 			for n in neighbors:
