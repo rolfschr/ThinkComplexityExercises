@@ -1,5 +1,6 @@
 import re, string
 import Downey.Pmf as Pmf
+import Downey.Cdf as Cdf
 import matplotlib.pyplot as pyplot
 
 ### chap 2, ex 07 BEGIN ###
@@ -73,6 +74,20 @@ def zipf_plot(hist):
 	pyplot.show()
 
 ### chap 5, ex 01 END   ###
+
+
+### chap 5, ex 03 BEGIN ###
+def plot_ccdf(xs):
+	xs = sorted(xs)
+	cdf = Cdf.MakeCdfFromList(xs)
+	ys = [1 - cdf.Prob(x) for x in xs]
+	pyplot.plot(xs, ys)
+	pyplot.yscale('log')
+	pyplot.xlabel('value')
+	pyplot.ylabel('prob')
+	pyplot.show()
+
+### chap 5, ex 03 END   ###
 
 def main(script, *args):
 	hist = zipf("alice_wonderland.txt")
