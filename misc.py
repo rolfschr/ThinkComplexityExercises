@@ -1,4 +1,6 @@
-import string
+import re, string
+import Downey.Pmf as Pmf
+import matplotlib.pyplot as pyplot
 
 ### chap 2, ex 07 BEGIN ###
 def gen_identifier():
@@ -35,11 +37,46 @@ def bisect(t, ls, start = 0, end = None):
 		return bisect(t, ls, i+1, end)
 ### chap 3, ex 03 END   ###
 
-def main(script, *args):
-	iter = gen_identifier()
-	for n in range(100):
-		print iter.next()
+### chap 5, ex 01 BEGIN ###
+def zipf(filename):
+	words = __zipf_get_words(filename)
+	hist = Pmf.MakeHistFromList(words)
+	return hist
 
+def __zipf_get_words(filename):
+	try:
+		with open(filename, 'r') as f:
+			for line in f:
+				text = re.sub(r'([^\s\w]|_)+', '', line)
+				text = text.lower()
+				text = text.rstrip().split()
+				for word in text:
+					yield word
+	except IOError:
+		pass
+
+def zipf_print(hist):
+	ls = sorted(hist.GetDict(), key=hist.GetDict().get, reverse = True)
+	for word in ls:
+		print word
+
+def zipf_plot(hist):
+	fs = sorted(hist.Freqs(), reverse = True)
+	rs = [i for i in range(1, len(fs) + 1)]
+	pyplot.plot(rs, fs)
+	scale = 'log'
+	pyplot.xscale(scale)
+	pyplot.yscale(scale)
+	pyplot.title('')
+	pyplot.xlabel('rank')
+	pyplot.ylabel('freqs')
+	pyplot.show()
+
+### chap 5, ex 01 END   ###
+
+def main(script, *args):
+	hist = zipf("alice_wonderland.txt")
+	zipf_plot(hist)
 
 
 if __name__ == '__main__':

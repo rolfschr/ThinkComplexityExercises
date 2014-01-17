@@ -15,6 +15,7 @@ List of Exercises
 * chap 3, ex 03: misc.py
 * chap 4, ex 01: FIFO.py
 * chap 4, ex 04: SmallWorldGraph.py/TestGraph.py
+* chap 5, ex 01: misc.py
 
 Licence
 -------
