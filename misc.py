@@ -75,19 +75,40 @@ def zipf_plot(hist):
 
 ### chap 5, ex 01 END   ###
 
-
 ### chap 5, ex 03 BEGIN ###
-def plot_ccdf(xs):
+### chap 5, ex 04 BEGIN ###
+def plot_ccdf(xs, xscale = 'linear', yscale = 'log'):
 	xs = sorted(xs)
 	cdf = Cdf.MakeCdfFromList(xs)
 	ys = [1 - cdf.Prob(x) for x in xs]
 	pyplot.plot(xs, ys)
-	pyplot.yscale('log')
-	pyplot.xlabel('value')
-	pyplot.ylabel('prob')
+	pyplot.xscale(xscale)
+	pyplot.yscale(yscale)
+	pyplot.xlabel('value (%s)' % xscale)
+	pyplot.ylabel('prob (%s)' % yscale)
 	pyplot.show()
 
 ### chap 5, ex 03 END   ###
+### chap 5, ex 04 END   ###
+
+### chap 5, ex 05 BEGIN ###
+def pop_dist(filename = 'pops.txt'):
+	with open(filename) as f:
+		pops = map(lambda s: int(s.rstrip()), f.readlines())
+		cdf = Cdf.MakeCdfFromList(pops)
+		xs, ps = cdf.Render()
+		pyplot.plot(xs, ps)
+		pyplot.xlabel('value')
+		pyplot.ylabel('prob')
+		pyplot.show()
+		pyplot.plot(xs, ps)
+		pyplot.xscale('log')
+		pyplot.xlabel('value')
+		pyplot.ylabel('prob')
+		pyplot.show()
+		plot_ccdf(pops, xscale = 'log', yscale = 'log')
+
+### chap 5, ex 05 END   ###
 
 def main(script, *args):
 	hist = zipf("alice_wonderland.txt")
