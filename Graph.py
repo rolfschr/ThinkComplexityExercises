@@ -139,7 +139,7 @@ class Graph(dict):
 		for v in self:
 			for w in self:
 				if (not w in self[v]):
-					self.add_edge(v, w)
+					self.make_edge(v, w)
 ### chap 2, ex 02.9 END   ###
 
 	def remove_all_edges(self):
