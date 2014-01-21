@@ -20,6 +20,7 @@ List of Exercises
 * chap 5, ex 01: misc.py
 * chap 5, ex 03: misc.py
 * chap 5, ex 04: misc.py
+* chap 5, ex 06: barabasi.py
 
 Licence
 -------

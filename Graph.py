@@ -66,6 +66,20 @@ class Graph(dict):
 		"""Add a vertex to the graph."""
 		self[v] = {}
 
+	def get_degree(self, v):
+		""" return number of edges of this vertex """
+		if (isinstance(v, str) or isinstance(v, int)):
+			v = Vertex(str(v))
+		return len(self[v])
+
+	def get_degrees(self):
+		for v in self.keys():
+			yield self.get_degree(v)
+
+	def add_edges(self, edges):
+		for e in edges:
+			self.add_edge(e)
+
 	def add_edge(self, e):
 		"""Adds and edge to the graph by adding an entry in both directions.
 
