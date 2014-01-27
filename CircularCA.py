@@ -20,11 +20,45 @@ class CircularCA(CA):
 			a[i,j] = t[tup]
 ### chap 6, ex 01 END   ###
 
-if __name__ == '__main__':
-	n = 10
-	ca = CircularCA(50, n, ratio = 1)
+### chap 6, ex 03.1 BEGIN ###
+def ex631():
+	n = 2**8
+	rule = 110
+	ratio = 2
+	ca = CA(rule, n, ratio = ratio)
+	#m = ratio * n / 2
+	#start = 1
+	#end = start + 100
+	#for i in range(start, end, 3):
+	#	ca.array[0, i] = 0
+	#	ca.array[0, i+1] = 1
+	#	ca.array[0, i+2] = 0
+	#ca.next += 1
+	ca.start_random()
+	ca.loop(n-1)
+	return ca
+	return ca
+### chap 6, ex 03.1 END   ###
+
+### chap 6, ex 03.2 BEGIN ###
+def ex632():
+	n = 2**8
+	rule = 110
+	ratio = 2
+	ca = CA(rule, n, ratio = ratio)
+	#ca.start_random()
+	m = ratio * n / 2
+	ca.array[0, m-1] = 1
+	ca.array[0, m] = 1
+	for i in range(20):
+		ca.array[0, m+i] = 1
 	ca.start_single()
 	ca.loop(n-1)
+	return ca
+### chap 6, ex 03.2 END   ###
+
+if __name__ == '__main__':
+	ca = ex631()
 
 	drawer = Downey.CADrawer.PyplotDrawer()
 	drawer.draw(ca)

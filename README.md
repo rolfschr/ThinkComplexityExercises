@@ -22,6 +22,8 @@ List of Exercises
 * chap 5, ex 04: misc.py
 * chap 5, ex 06: barabasi.py
 * chap 6, ex 01: CircularCA.py
+* chap 6, ex 02: lcg.py
+* chap 6, ex 03: CircularCA.py
 
 Licence
 -------
