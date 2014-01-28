@@ -37,7 +37,6 @@ def ex631():
 	ca.start_random()
 	ca.loop(n-1)
 	return ca
-	return ca
 ### chap 6, ex 03.1 END   ###
 
 ### chap 6, ex 03.2 BEGIN ###

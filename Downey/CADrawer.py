@@ -99,7 +99,7 @@ class PILDrawer(Drawer):
         try:
             import Gui
         except ImportError:
-            import swampy.Gui
+            import swampy.Gui as Gui
         self.csize = csize
         self.color = color
 
