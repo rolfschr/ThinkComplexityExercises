@@ -24,6 +24,7 @@ List of Exercises
 * chap 6, ex 01: CircularCA.py
 * chap 6, ex 02: lcg.py
 * chap 6, ex 03: CircularCA.py
+* chap 6, ex 04: TM.py
 
 Licence
 -------
