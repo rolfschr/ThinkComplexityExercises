@@ -21,7 +21,7 @@ class Life(object):
 	n:     the number of rows and columns
 	"""
 
-	def __init__(self, n, mode='wrap', random=False):
+	def __init__(self, n, mode='wrap', initial=None):
 		"""Attributes:
 		n:      number of rows and columns
 		mode:   how border conditions are handled
@@ -30,10 +30,18 @@ class Life(object):
 		"""
 		self.n = n
 		self.mode = mode
-		if random:
+		if initial == "random":
 			self.array = numpy.random.random_integers(0, 1, (n, n))
 		else:
 			self.array = numpy.zeros((n, n), numpy.int8)
+		if initial == "r":
+			m = n / 2
+			#array[row, col]
+			self.array[m-1, m] = 1
+			self.array[m, m] = 1
+			self.array[m, m-1] = 1
+			self.array[m+1, m] = 1
+			self.array[m+1, m+1] = 1
 
 		self.weights = numpy.array([[1,1,1],
 			[1,10,1],
@@ -112,10 +120,10 @@ def main(script, n=20, *args):
 
 	n = int(n)
 
-	life = Life(n, random=True)
+	life = Life(n, initial = "r")
 	life.add_glider()
 	viewer = LifeViewer(life)
-	viewer.animate(steps=2000)
+	viewer.animate(steps=1200)
 
 
 if __name__ == '__main__':
