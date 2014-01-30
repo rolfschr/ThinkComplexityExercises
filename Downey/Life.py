@@ -71,6 +71,20 @@ class Life(object):
 		return True
 ### chap 7, ex 01 END(1)   ###
 
+### chap 7, ex 03 BEGIN ###
+	def readPlaintext(self, filename, init_x = 10, init_y = 10):
+		with open(filename) as f:
+			lines = f.readlines()
+			x = init_x
+			for line in lines:
+				if (not line.startswith("!")):
+					y = init_y
+					for c in line.strip():
+						if (c != "."):
+							self.array[x, y] = 1
+						y += 1
+				x += 1
+### chap 7, ex 03 END   ###
 
 class LifeViewer(object):
 	"""Generates an animated view of the grid."""
@@ -120,10 +134,11 @@ def main(script, n=20, *args):
 
 	n = int(n)
 
-	life = Life(n, initial = "r")
-	life.add_glider()
+	life = Life(n, initial = None)
+	#life.add_glider()
+	life.readPlaintext("Downey/puffer1.cells")
 	viewer = LifeViewer(life)
-	viewer.animate(steps=1200)
+	viewer.animate(steps=1000)
 
 
 if __name__ == '__main__':
