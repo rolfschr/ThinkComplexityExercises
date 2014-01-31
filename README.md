@@ -26,6 +26,9 @@ List of Exercises
 * chap 6, ex 03: CircularCA.py
 * chap 6, ex 04: TM.py
 * chap 7, ex 01: Downey/Life.py
+* chap 7, ex 02: Downey/Life.py
+* chap 7, ex 03: Downey/Life.py
+* chap 7, ex 05: Turmite.py
 
 Licence
 -------

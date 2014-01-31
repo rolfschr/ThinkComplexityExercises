@@ -109,12 +109,13 @@ class LifeViewer(object):
 		self.pcolor = pyplot.pcolor(a, cmap=self.cmap)
 		self.fig.canvas.draw()
 
-	def animate(self, steps=10):
+	def animate(self, steps=10, stop = False):
 		"""Creates the GUI and then invokes animate_callback.
 
 		Generates an animation with the given number of steps.
 		"""
 		self.steps = steps
+		self.stop = stop
 		self.fig.canvas.manager.window.after(1000, self.animate_callback)
 		pyplot.show()
 
@@ -124,7 +125,7 @@ class LifeViewer(object):
 			ret = self.life.step()
 			self.update()
 ### chap 7, ex 01 BEGIN(2) ###
-			if (not ret):
+			if (self.stop and not ret):
 				break
 			print i
 ### chap 7, ex 01 END(2)   ###
