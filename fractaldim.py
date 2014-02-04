@@ -5,6 +5,7 @@ from Downey.CADrawer import PyplotDrawer
 import matplotlib.pyplot as pyplot
 import numpy as np
 
+### chap 8, ex 01 BEGIN ###
 def fractal_dim(ca_rule, t = 100, plot = True):
 	""" plot box counting dimension and return estimated dimension"""
 	ca = CA(ca_rule, t)
@@ -15,8 +16,8 @@ def fractal_dim(ca_rule, t = 100, plot = True):
 		ca.step()
 		Ns.append(sum(ca.array[ca.next-1]))
 	Ns = np.cumsum(Ns)
-	one_over_eps = range(1, len(Ns) + 1)
-	dim = np.log(Ns[-1]) / np.log(one_over_eps[-1])
+	one_over_eps = range(1, ca.n + 1)
+	dim, _ = np.polyfit(np.log(one_over_eps), np.log(Ns), 1)
 	if (plot):
 		pyplot.plot(one_over_eps, Ns)
 		scale = 'log'
@@ -29,6 +30,7 @@ def fractal_dim(ca_rule, t = 100, plot = True):
 		drawer.draw(ca)
 		drawer.show()
 	return dim
+### chap 8, ex 01 END   ###
 
 
 if __name__ == '__main__':
