@@ -15,8 +15,8 @@ def fractal_dim(ca_rule, t = 100, plot = True):
 		ca.step()
 		Ns.append(sum(ca.array[ca.next-1]))
 	Ns = np.cumsum(Ns)
-	one_over_eps = range(1, len(Ns) + 1)
-	dim = np.log(Ns[-1]) / np.log(one_over_eps[-1])
+	one_over_eps = range(1, ca.n + 1)
+	dim, _ = np.polyfit(np.log(one_over_eps), np.log(Ns), 1)
 	if (plot):
 		pyplot.plot(one_over_eps, Ns)
 		scale = 'log'
