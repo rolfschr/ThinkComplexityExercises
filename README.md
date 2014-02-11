@@ -29,6 +29,8 @@ List of Exercises
 * chap 7, ex 02: Downey/Life.py
 * chap 7, ex 03: Downey/Life.py
 * chap 7, ex 05: Turmite.py
+* chap 8, ex 01: fractaldim.py
+* chap 8, ex 02: forestfire.py
 
 Licence
 -------
