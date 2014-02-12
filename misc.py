@@ -1,7 +1,8 @@
-import re, string
+import re, string, cmath, math
 import Downey.Pmf as Pmf
 import Downey.Cdf as Cdf
 import matplotlib.pyplot as pyplot
+import numpy as np
 
 ### chap 2, ex 07 BEGIN ###
 def gen_identifier():
@@ -110,9 +111,27 @@ def pop_dist(filename = 'pops.txt'):
 
 ### chap 5, ex 05 END   ###
 
+### chap 9, ex 02 BEGIN ###
+def H(h, n):
+	N = len(h)
+	H = 0
+	i = complex(0, 1)
+	W = cmath.exp(2 * math.pi * i * n / N)
+	for k in range(N):
+		H += h[k] * (W ** k)
+	return H
+
+def dft(h):
+	N = len(h)
+	Hn = []
+	for n in range(0, N):
+		Hn.append(H(h, n))
+	return Hn
+### chap 9, ex 02 END   ###
+
 def main(script, *args):
-	hist = zipf("alice_wonderland.txt")
-	zipf_plot(hist)
+	h = np.random.random(100)
+	Hn = dft(h)
 
 
 if __name__ == '__main__':

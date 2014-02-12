@@ -31,9 +31,10 @@ List of Exercises
 * chap 7, ex 05: Turmite.py
 * chap 8, ex 01: fractaldim.py
 * chap 8, ex 02: forestfire.py
-* chap 9, ex 01: soc.py
+* chap 9, ex 01: soc.py (failed :/)
+* chap 9, ex 02: misc.py
 
 Licence
 -------
 
-Seriously, a licence?
+Seriously, a license?
