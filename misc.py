@@ -129,9 +129,42 @@ def dft(h):
 	return Hn
 ### chap 9, ex 02 END   ###
 
+### chap 9, ex 03 BEGIN ###
+def fft(h):
+	N = len(h)
+	if (N == 1):
+		return h
+	he = h[::2] # even
+	ho = h[1::2] # odd
+	He = fft(he)
+	Ho = fft(ho)
+	Hn = []
+	i = complex(0, 1)
+	W = cmath.exp(2 * math.pi * i / N)
+	for k in range(0, N/2):
+		Hn.append(He[k] + (W**k * Ho[k]))
+	for k in range(0, N/2):
+		Hn.append(He[k] - (W**k * Ho[k]))
+	return Hn
+
+def psd(h):
+	Hn = fft(h)
+	Pn = [(hn * hn.conjugate()).real for hn in Hn]
+	return Pn
+
+### chap 9, ex 03 END   ###
+
 def main(script, *args):
-	h = np.random.random(100)
-	Hn = dft(h)
+	N = 128
+	t = [1.0*n/N for n in range(N)]
+	h = [math.sin(2*math.pi*6*tn) + math.sin(2*math.pi*12*tn) for tn in t]
+	print "h:", h
+	Hn = fft(h)
+	print "Hn:", Hn
+	Pn = psd(h)
+	print "Pn:", Pn
+	print Hn[0], Hn[1]
+	print Pn[0], Pn[1]
 
 
 if __name__ == '__main__':

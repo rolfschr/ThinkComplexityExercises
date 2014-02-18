@@ -33,6 +33,7 @@ List of Exercises
 * chap 8, ex 02: forestfire.py
 * chap 9, ex 01: soc.py (failed :/)
 * chap 9, ex 02: misc.py
+* chap 9, ex 03: misc.py
 
 Licence
 -------
