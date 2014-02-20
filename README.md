@@ -34,6 +34,7 @@ List of Exercises
 * chap 9, ex 01: soc.py (failed :/)
 * chap 9, ex 02: misc.py
 * chap 9, ex 03: misc.py
+* chap 10, ex 01: segregation.py
 
 Licence
 -------
