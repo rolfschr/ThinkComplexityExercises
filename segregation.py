@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-#import Downey.Life as Life
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as pyplot
 
+### chap 10, ex 01 BEGIN ###
 class Segregation(object):
-	def __init__(self, n, empty_p = 0.1, num_happy = 2):
+	def __init__(self, n, empty_p = 0.1, num_happy = 5):
 		self.array = np.random.random_integers(1, 2, (n, n))
 		self.num_happy = num_happy
 		self.empty = set()
@@ -41,9 +41,11 @@ class Segregation(object):
 		else:
 			self.happy_agent.append(1)
 
-	def is_happy(self, x, y):
+	def is_happy(self, x, y, c = None):
+		if c == None:
+			c = self.array[x, y]
 		s = self.array[max(0, x-1):x+2,max(0, y-1):y+2]
-		si = (s == self.array[x, y]).astype(int)
+		si = (s == c).astype(int)
 		return np.sum(si) - 1 >= self.num_happy
 
 	def loop(self, steps = 10000):
@@ -65,7 +67,36 @@ class Segregation(object):
 		pyplot.plot(chap)
 		pyplot.title("probability to find an happy agent at a random location (in %)")
 		pyplot.savefig('c.png')
+### chap 10, ex 01 END   ###
+
+### chap 10, ex 02 BEGIN ###
+class SegregationBishop(Segregation):
+	def __init__(self, n, empty_p = 0.1, num_happy = 5, new_neighbors = 0.7):
+		super(SegregationBishop, self).__init__(n, empty_p, num_happy)
+		self.new_neighbors = new_neighbors
+
+	def step(self):
+		while (True):
+			x, y = np.random.random_integers(0, self.n-1, 2)
+			if ((x, y) not in self.empty):
+				break
+		if (self.is_happy(x, y)): # measure prob to find a happy agent
+			self.happy_agent.append(1)
+		else:
+			self.happy_agent.append(0)
+		nx, ny = self.empty.pop()
+		if (self.is_happy(nx, ny, self.array[x, y])
+				or np.random.random > self.new_neighbors):
+			# move if a) new like new neighbors or b) don't fore small fraction of agents
+			self.array[nx, ny] = self.array[x, y]
+			self.array[x, y] = 0
+			self.empty.add((x,y))
+		else:
+			# else, dont move
+			self.empty.add((nx,ny))
+### chap 10, ex 02 END   ###
 
 if __name__ == '__main__':
 	s = Segregation(100, 0.1, num_happy = 5)
+	s = SegregationBishop(100, 0.1, num_happy = 2)
 	s.loop(100000)
