@@ -37,6 +37,7 @@ List of Exercises
 * chap 10, ex 01: segregation.py
 * chap 10, ex 02: segregation.py
 * chap 10, ex 03: Downey/Highway.py (stolen!)
+* chap 10, ex 05: PlayerTitforTat.py
 
 Licence
 -------
